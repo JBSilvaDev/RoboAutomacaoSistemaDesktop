@@ -43,6 +43,9 @@
       <x:String>System.Security</x:String>
       <x:String>UiPath.UIAutomationNext.Activities.Services.RuntimeAnalyze</x:String>
       <x:String>UiPath.Activities.Contracts</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -106,18 +109,30 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="969,1774" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="969,2448" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="ui:UiElement" Name="elementApp" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtPlanilhaExcel" />
+      <Variable x:TypeArguments="x:Int32" Name="index">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">ForEachRow_1</x:String>
+            <x:String x:Key="SourcePropertyName">CurrentIndex</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Ler planilha excel" sap:VirtualizedContainerService.HintSize="484,203" sap2010:WorkflowViewState.IdRef="Sequence_2">
-      <Sequence.Variables>
-        <Variable x:TypeArguments="sd:DataTable" Name="dtPlanilhaExcel" />
-      </Sequence.Variables>
+    <Sequence DisplayName="Ler planilha excel" sap:VirtualizedContainerService.HintSize="552,203" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -125,13 +140,14 @@
       </sap:WorkflowViewStateService.ViewState>
       <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dtPlanilhaExcel]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="416,111" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Plan1" WorkbookPath="arquivos\Transactions.xlsx" />
     </Sequence>
-    <Sequence DisplayName="Iniciar sistema / Login" sap:VirtualizedContainerService.HintSize="484,1315" sap2010:WorkflowViewState.IdRef="Sequence_3">
+    <Sequence DisplayName="Iniciar sistema / Login" sap:VirtualizedContainerService.HintSize="552,57" sap2010:WorkflowViewState.IdRef="Sequence_3">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="UiDemo" sap:VirtualizedContainerService.HintSize="450,1223" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Always" ScopeGuid="ac4b0244-916d-47f4-865b-763df4cef494" Version="V2">
+      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="UiDemo" sap:VirtualizedContainerService.HintSize="450,1223" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" OpenMode="Always" OutUiElement="[elementApp]" ScopeGuid="ac4b0244-916d-47f4-865b-763df4cef494" Version="V2">
         <uix:NApplicationCard.Body>
           <ActivityAction x:TypeArguments="x:Object">
             <ActivityAction.Argument>
@@ -227,14 +243,166 @@
         </uix:NApplicationCard.TargetApp>
       </uix:NApplicationCard>
     </Sequence>
-    <Sequence DisplayName="Realizar lançamentos" sap:VirtualizedContainerService.HintSize="484,121" sap2010:WorkflowViewState.IdRef="Sequence_4">
+    <Sequence DisplayName="Realizar lançamentos" sap:VirtualizedContainerService.HintSize="552,2053" sap2010:WorkflowViewState.IdRef="Sequence_4">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
+      <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application/Browser" sap:VirtualizedContainerService.HintSize="518,1961" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InUiElement="[elementApp]" OpenMode="Never" ScopeGuid="18b39d18-4ae8-47ae-91ea-6ad81d44c4bb" Version="V2">
+        <uix:NApplicationCard.Body>
+          <ActivityAction x:TypeArguments="x:Object">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="484,1801" sap2010:WorkflowViewState.IdRef="Sequence_7">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[index]" DataTable="[dtPlanilhaExcel]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="450,1741" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                <ui:ForEachRow.Body>
+                  <ActivityAction x:TypeArguments="sd:DataRow">
+                    <ActivityAction.Argument>
+                      <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+                    </ActivityAction.Argument>
+                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,1552" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                      <Sequence.Variables>
+                        <Variable x:TypeArguments="x:String" Name="strTransacao" />
+                      </Sequence.Variables>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:03" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="382,117" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[$&quot;Realizando cadastro da linha: {index+1}&quot;]" />
+                      <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Cash In'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="382,286" sap2010:WorkflowViewState.IdRef="NTypeInto_4" ScopeIdentifier="18b39d18-4ae8-47ae-91ea-6ad81d44c4bb" Text="[CType(CurrentRow(&quot;CashIn&quot;), Double).ToString()]" Version="V4">
+                        <uix:NTypeInto.Target>
+                          <uix:TargetAnchorable CVScreenId="9550e650-3427-46ab-8bf0-ed28cf82996d" ContentHash="vZK7-BcCTUS5Hw1M-fogNA" CvElementArea="331, 168, 123, 25" CvType="InputBox" DesignTimeRectangle="333, 169, 120, 23" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;ctrl automationid='cashintb' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='cashintb' role='editable text' /&gt;" Guid="a44c05f5-887e-40bf-ad0e-06661829951a" InformativeScreenshot="8a3b3195d7bd403270576e789ab42037.png" IsResponsive="True" Reference="gfYYKYfGsUSuln0j38gRuw/wqzsDsv6WUWPsdrWEbaPFA" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UIDemo' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                            <uix:TargetAnchorable.Anchors>
+                              <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                <uix:Target CVScreenId="9550e650-3427-46ab-8bf0-ed28cf82996d" CvTextArea="263, 172, 50, 13" CvTextArgument="Cash In" CvType="Text" DesignTimeRectangle="264, 171, 48, 16" ElementType="Text" FullSelectorArgument="&lt;ctrl name='Cash In' role='text' /&gt;&lt;ctrl name='Cash In' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Cash In' role='text' /&gt;&lt;ctrl name='Cash In' role='text' automationid='' check:text='Cash In' /&gt;" Guid="c6122423-3430-48c7-b202-6c3ff8a0e864" SearchSteps="Selector, FuzzySelector, CV" />
+                              </scg:List>
+                            </uix:TargetAnchorable.Anchors>
+                          </uix:TargetAnchorable>
+                        </uix:NTypeInto.Target>
+                        <uix:NTypeInto.VerifyOptions>
+                          <uix:VerifyExecutionTypeIntoOptions DisplayName="Input 'Cash In'" Mode="Appears">
+                            <uix:VerifyExecutionTypeIntoOptions.Retry>
+                              <InArgument x:TypeArguments="x:Boolean" />
+                            </uix:VerifyExecutionTypeIntoOptions.Retry>
+                            <uix:VerifyExecutionTypeIntoOptions.Target>
+                              <uix:TargetAnchorable CVScreenId="1ade93da-1c96-426a-9e86-12141371e814" ContentHash="fYaDGMnbb02ojkXDdvEONw" CvElementArea="331, 168, 123, 25" CvType="InputBox" DesignTimeRectangle="333, 169, 120, 23" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;ctrl automationid='cashintb' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='cashintb' role='editable text' /&gt;" Guid="d1e82a67-cc3a-4e95-8a9d-2e0a1d3c834a" InformativeScreenshot="ee6c96a87939ad3d5c159b56e9ea4a4d.png" IsResponsive="True" Reference="gfYYKYfGsUSuln0j38gRuw/OKrQqCNvoUWEM5j3ohWI2A" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UIDemo' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target CVScreenId="1ade93da-1c96-426a-9e86-12141371e814" CvTextArea="263, 172, 50, 13" CvTextArgument="Cash In" CvType="Text" DesignTimeRectangle="264, 171, 48, 16" ElementType="Text" FullSelectorArgument="&lt;ctrl name='Cash In' role='text' /&gt;&lt;ctrl name='Cash In' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Cash In' role='text' /&gt;&lt;ctrl name='Cash In' role='text' automationid='' check:text='Cash In' /&gt;" Guid="e84491fd-d16f-479d-9d0c-57e6905aa470" SearchSteps="Selector, FuzzySelector, CV" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:VerifyExecutionTypeIntoOptions.Target>
+                            <uix:VerifyExecutionTypeIntoOptions.Timeout>
+                              <InArgument x:TypeArguments="x:Double" />
+                            </uix:VerifyExecutionTypeIntoOptions.Timeout>
+                          </uix:VerifyExecutionTypeIntoOptions>
+                        </uix:NTypeInto.VerifyOptions>
+                      </uix:NTypeInto>
+                      <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'On Us Check'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="382,286" sap2010:WorkflowViewState.IdRef="NTypeInto_5" ScopeIdentifier="18b39d18-4ae8-47ae-91ea-6ad81d44c4bb" Text="[CurrentRow(&quot;OnUsCheck&quot;).ToString]" Version="V4">
+                        <uix:NTypeInto.Target>
+                          <uix:TargetAnchorable CVScreenId="b13fa599-19d2-4c4b-942a-f747d9e7297b" ContentHash="zCcKYKe720eefU4XrYwSrQ" CvElementArea="332, 207, 122, 25" CvType="InputBox" DesignTimeRectangle="333, 208, 120, 23" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;ctrl automationid='onustb' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='onustb' role='editable text' /&gt;" Guid="f4a15b08-87bf-4b96-a5fe-882bd266f947" InformativeScreenshot="18e52d4e9898ee36c6901788e6cd54fa.png" IsResponsive="True" Reference="gfYYKYfGsUSuln0j38gRuw/BMxhQypDY0awvoTSchaI7Q" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UIDemo' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                            <uix:TargetAnchorable.Anchors>
+                              <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                <uix:Target CVScreenId="b13fa599-19d2-4c4b-942a-f747d9e7297b" CvTextArea="228, 211, 85, 13" CvTextArgument="On Us Check" CvType="Text" DesignTimeRectangle="229, 210, 83, 16" ElementType="Text" FullSelectorArgument="&lt;ctrl name='On Us Check' role='text' /&gt;&lt;ctrl name='On Us Check' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='On Us Check' role='text' /&gt;&lt;ctrl name='On Us Check' role='text' automationid='' check:text='On Us Check' /&gt;" Guid="ffd5a581-6aef-45b6-baf4-cb213672b172" SearchSteps="Selector, FuzzySelector, CV" />
+                              </scg:List>
+                            </uix:TargetAnchorable.Anchors>
+                          </uix:TargetAnchorable>
+                        </uix:NTypeInto.Target>
+                        <uix:NTypeInto.VerifyOptions>
+                          <uix:VerifyExecutionTypeIntoOptions DisplayName="Input 'On Us Check'" Mode="Appears">
+                            <uix:VerifyExecutionTypeIntoOptions.Retry>
+                              <InArgument x:TypeArguments="x:Boolean" />
+                            </uix:VerifyExecutionTypeIntoOptions.Retry>
+                            <uix:VerifyExecutionTypeIntoOptions.Target>
+                              <uix:TargetAnchorable CVScreenId="b36a0486-4030-4f61-895c-260dd8b79dac" ContentHash="qw9Xvc6TukKwLL_siSItNg" CvElementArea="332, 207, 122, 25" CvType="InputBox" DesignTimeRectangle="333, 208, 120, 23" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;ctrl automationid='onustb' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='onustb' role='editable text' /&gt;" Guid="45ff8c08-9926-4405-a560-f5ce7bf29d8a" InformativeScreenshot="53371511c05edeb17e55a0b6099e5f73.png" IsResponsive="True" Reference="gfYYKYfGsUSuln0j38gRuw/q55ItmRCIEilJbusdEhnjQ" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UIDemo' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target CVScreenId="b36a0486-4030-4f61-895c-260dd8b79dac" CvTextArea="228, 211, 85, 13" CvTextArgument="On Us Check" CvType="Text" DesignTimeRectangle="229, 210, 83, 16" ElementType="Text" FullSelectorArgument="&lt;ctrl name='On Us Check' role='text' /&gt;&lt;ctrl name='On Us Check' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='On Us Check' role='text' /&gt;&lt;ctrl name='On Us Check' role='text' automationid='' check:text='On Us Check' /&gt;" Guid="fc49eaf3-1571-4151-b184-eebe2a0a02dc" SearchSteps="Selector, FuzzySelector, CV" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:VerifyExecutionTypeIntoOptions.Target>
+                            <uix:VerifyExecutionTypeIntoOptions.Timeout>
+                              <InArgument x:TypeArguments="x:Double" />
+                            </uix:VerifyExecutionTypeIntoOptions.Timeout>
+                          </uix:VerifyExecutionTypeIntoOptions>
+                        </uix:NTypeInto.VerifyOptions>
+                      </uix:NTypeInto>
+                      <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Not On Us Check'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="382,286" sap2010:WorkflowViewState.IdRef="NTypeInto_6" ScopeIdentifier="18b39d18-4ae8-47ae-91ea-6ad81d44c4bb" Text="[CurrentRow(&quot;NotOnUsCheck&quot;).ToString]" Version="V4">
+                        <uix:NTypeInto.Target>
+                          <uix:TargetAnchorable CVScreenId="6ebcd3d4-b26e-444c-b0f7-f65029b51764" ContentHash="dWWq7Oa0m0OU1c5EazOjCw" CvElementArea="331, 246, 123, 26" CvType="InputBox" DesignTimeRectangle="333, 247, 120, 23" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;ctrl automationid='notonustb' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='notonustb' role='editable text' /&gt;" Guid="6ac74105-c7bd-4e71-8c60-7d3eefbe1cc1" InformativeScreenshot="d644e7ded5de57a46ec82c88731ff235.png" IsResponsive="True" Reference="gfYYKYfGsUSuln0j38gRuw/cK3m9ZWxq0ulRKYAHn6X6Q" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UIDemo' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                            <uix:TargetAnchorable.Anchors>
+                              <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                <uix:Target CVScreenId="6ebcd3d4-b26e-444c-b0f7-f65029b51764" CvTextArea="202, 250, 111, 13" CvTextArgument="Not On Us Check" CvType="Text" DesignTimeRectangle="203, 249, 109, 16" ElementType="Text" FullSelectorArgument="&lt;ctrl name='Not On Us Check' role='text' /&gt;&lt;ctrl name='Not On Us Check' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Not On Us Check' role='text' /&gt;&lt;ctrl name='Not On Us Check' role='text' automationid='' check:text='Not On Us Check' /&gt;" Guid="fbf34076-4c9f-462a-8ecd-16828408253c" SearchSteps="Selector, FuzzySelector, CV" />
+                              </scg:List>
+                            </uix:TargetAnchorable.Anchors>
+                          </uix:TargetAnchorable>
+                        </uix:NTypeInto.Target>
+                        <uix:NTypeInto.VerifyOptions>
+                          <uix:VerifyExecutionTypeIntoOptions DisplayName="Input 'Not On Us Check'" Mode="Appears">
+                            <uix:VerifyExecutionTypeIntoOptions.Retry>
+                              <InArgument x:TypeArguments="x:Boolean" />
+                            </uix:VerifyExecutionTypeIntoOptions.Retry>
+                            <uix:VerifyExecutionTypeIntoOptions.Target>
+                              <uix:TargetAnchorable CVScreenId="2fa7b1c0-4be0-47fd-b521-3926556a30b4" ContentHash="XMS1oJV0fEedaD0LeMOEGg" CvElementArea="331, 246, 123, 26" CvType="InputBox" DesignTimeRectangle="333, 247, 120, 23" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;ctrl automationid='notonustb' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='notonustb' role='editable text' /&gt;" Guid="89589317-1b05-44a7-928c-bbb1c858fb0f" InformativeScreenshot="40d7dc506cae117c87be85d849162a39.png" IsResponsive="True" Reference="gfYYKYfGsUSuln0j38gRuw/aseC2LSeaEavoDkzJOp6JA" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UIDemo' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target CVScreenId="2fa7b1c0-4be0-47fd-b521-3926556a30b4" CvTextArea="202, 250, 111, 13" CvTextArgument="Not On Us Check" CvType="Text" DesignTimeRectangle="203, 249, 109, 16" ElementType="Text" FullSelectorArgument="&lt;ctrl name='Not On Us Check' role='text' /&gt;&lt;ctrl name='Not On Us Check' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Not On Us Check' role='text' /&gt;&lt;ctrl name='Not On Us Check' role='text' automationid='' check:text='Not On Us Check' /&gt;" Guid="5354a916-6f04-4ef9-9aa9-881c71988178" SearchSteps="Selector, FuzzySelector, CV" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:VerifyExecutionTypeIntoOptions.Target>
+                            <uix:VerifyExecutionTypeIntoOptions.Timeout>
+                              <InArgument x:TypeArguments="x:Double" />
+                            </uix:VerifyExecutionTypeIntoOptions.Timeout>
+                          </uix:VerifyExecutionTypeIntoOptions>
+                        </uix:NTypeInto.VerifyOptions>
+                      </uix:NTypeInto>
+                      <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Accept(1)'" sap:VirtualizedContainerService.HintSize="382,189" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="18b39d18-4ae8-47ae-91ea-6ad81d44c4bb" Version="V4">
+                        <uix:NClick.Target>
+                          <uix:TargetAnchorable CVScreenId="954fcbe9-90c6-4bbc-880d-e349d670ae79" CvElementArea="440, 545, 83, 33" CvTextArea="461, 555, 39, 14" CvTextArgument="Accept" CvType="Button" DesignTimeRectangle="441, 546, 80, 31" DesignTimeScaleFactor="1" ElementType="Button" FullSelectorArgument="&lt;ctrl name='Accept' role='push button' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Accept' role='push button' automationid='' check:text='Accept' /&gt;" Guid="732d75e7-eb10-4567-8775-6089098f5640" InformativeScreenshot="267c5de8c7c5cde3c9c6c5aaf312747f.png" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UIDemo' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                            <uix:TargetAnchorable.Anchors>
+                              <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                <uix:Target CVScreenId="954fcbe9-90c6-4bbc-880d-e349d670ae79" CvElementArea="440, 545, 83, 33" CvTextArea="461, 555, 39, 14" CvTextArgument="Accept" CvType="Button" DesignTimeRectangle="463, 555, 36, 13" ElementType="Text" FullSelectorArgument="&lt;ctrl name='Accept' role='push button' /&gt;&lt;ctrl name='Accept' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Accept' role='push button' /&gt;&lt;ctrl name='Accept' role='text' automationid='' check:text='Accept' /&gt;" Guid="bff26e06-c1fa-4698-b212-d98aca182b20" SearchSteps="Selector, FuzzySelector, CV" />
+                              </scg:List>
+                            </uix:TargetAnchorable.Anchors>
+                          </uix:TargetAnchorable>
+                        </uix:NClick.Target>
+                      </uix:NClick>
+                      <uix:NGetText DisplayName="Get Text 'Transaction #'" sap:VirtualizedContainerService.HintSize="382,189" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="18b39d18-4ae8-47ae-91ea-6ad81d44c4bb" TextString="[strTransacao]" Version="V4">
+                        <uix:NGetText.Target>
+                          <uix:TargetAnchorable CVScreenId="34d44edc-ac2d-47e3-a4ba-6e2987d81caa" ContentHash="fGB86EmR3UK_QSmUKxP0LA" CvTextArea="519, 127, 50, 13" CvType="AnyWordGroup" DesignTimeRectangle="521, 126, 47, 16" DesignTimeScaleFactor="1" ElementType="Text" FullSelectorArgument="&lt;ctrl automationid='transnrlabel' /&gt;" FuzzySelectorArgument="&lt;ctrl automationid='transnrlabel' role='text' /&gt;" Guid="437c5444-f59d-4cc4-91bc-6cae5bf6f927" InformativeScreenshot="ac6dc26e83162c691ef7e5c4c3a56e15.png" Reference="gfYYKYfGsUSuln0j38gRuw/jDK_K8jz0UmE7EoopYfn8g" ScopeSelectorArgument="&lt;wnd app='uidemo.exe' cls='HwndWrapper*' title='UIDemo' /&gt;" SearchSteps="Selector, FuzzySelector, CV" Version="V4" Visibility="Interactive">
+                            <uix:TargetAnchorable.Anchors>
+                              <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                <uix:Target CVScreenId="34d44edc-ac2d-47e3-a4ba-6e2987d81caa" CvTextArea="426, 127, 90, 13" CvTextArgument="Transaction #:" CvType="Text" DesignTimeRectangle="428, 126, 88, 16" ElementType="Text" FullSelectorArgument="&lt;ctrl name='Transaction #:' role='text' /&gt;&lt;ctrl name='Transaction #:' role='text' /&gt;" FuzzySelectorArgument="&lt;ctrl name='Transaction #:' role='text' /&gt;&lt;ctrl name='Transaction #:' role='text' automationid='' check:text='Transaction #:' /&gt;" Guid="99aefb10-53bd-4a8e-b513-8e9d3d3b88c3" SearchSteps="Selector, FuzzySelector, CV" />
+                              </scg:List>
+                            </uix:TargetAnchorable.Anchors>
+                          </uix:TargetAnchorable>
+                        </uix:NGetText.Target>
+                      </uix:NGetText>
+                      <ui:WriteCell WorkbookPathResource="{x:Null}" Cell="[$&quot;D{index+2}&quot;]" DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="382,139" sap2010:WorkflowViewState.IdRef="WriteCell_1" SheetName="Plan1" Text="[strTransacao]" WorkbookPath="arquivos\Transactions.xlsx" />
+                    </Sequence>
+                  </ActivityAction>
+                </ui:ForEachRow.Body>
+              </ui:ForEachRow>
+            </Sequence>
+          </ActivityAction>
+        </uix:NApplicationCard.Body>
+        <uix:NApplicationCard.TargetApp>
+          <uix:TargetApp Area="0, 0, 0, 0" Version="V1" />
+        </uix:NApplicationCard.TargetApp>
+      </uix:NApplicationCard>
     </Sequence>
-    <Sequence DisplayName="Encerrar" sap:VirtualizedContainerService.HintSize="484,112" sap2010:WorkflowViewState.IdRef="Sequence_5">
+    <Sequence DisplayName="Encerrar" sap:VirtualizedContainerService.HintSize="552,112" sap2010:WorkflowViewState.IdRef="Sequence_5">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
