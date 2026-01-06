@@ -36,4 +36,4 @@ Este projeto é um robô de automação de processos (RPA) desenvolvido com UiPa
     - **Transactions.xlsx:** Planilha com os dados de transações a serem processados.
     - **UIDemo.exe:** O aplicativo de desktop alvo da automação.
 
-"RPA criado como desafio do curso Automatize Process com Erimateia"
+*RPA criado como desafio do curso Automatize Process com Erimateia*
