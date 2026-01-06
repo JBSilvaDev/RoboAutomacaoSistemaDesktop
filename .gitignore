@@ -1,5 +1,7 @@
 # Ignore project settings
 .project
+.storage/
+.tmh/
 .settings/
 *.user
 *.suo
